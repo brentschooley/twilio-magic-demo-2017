@@ -14,11 +14,11 @@ const client = require("twilio")(accountSid, authToken);
 
 const app = express();
 app.set("port", process.env.PORT || 5000);
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-app.get('/', function (req, res) {
-  res.send('Demo app ready for action!');
+app.get("/", function (req, res) {
+  res.send("Demo app ready for action!");
 });
 
 app.post("/sms", (req, res) => {
@@ -40,7 +40,7 @@ app.post("/sms", (req, res) => {
   const twiml = new MessagingResponse();
 
   twiml.message(
-`
+    `
 Thanks for messaging my demo!
 Find out more about Twilio in the docs at https://twilio.com/docs
 Check us out on YouTube at https://youtube.com/TwilioDevs
@@ -53,8 +53,8 @@ Check us out on YouTube at https://youtube.com/TwilioDevs
 
 app.post("/voice_response", (req, res) => {
   const twiml = new VoiceResponse();
-  //twiml.play({}, `${req.protocol}://${req.hostname}/that_one_song.mp3`);
-  twiml.play({}, `https://demo.twilio.com/docs/classic.mp3`);
+  twiml.play({}, `${req.protocol}://${req.hostname}/that_one_song.mp3`);
+  //twiml.play({}, `https://demo.twilio.com/docs/classic.mp3`);
   res.type("text/xml");
   res.send(twiml.toString());
 });
